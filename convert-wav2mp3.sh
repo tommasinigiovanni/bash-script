@@ -40,12 +40,12 @@ fi
 for i in $data*.wav; do 
     if avconv -i "$i" -acodec libmp3lame "$data"/"${i%%???}"mp3 > /dev/null 2>&1; then
         rm "$i";
-        echo "avconv transcod in MP3 $i: OK"  >> "$data-convert-wav2mp3";
+        echo "avconv transcod in MP3 $i: OK"  >> /tmp/"$data-convert-wav2mp3";
     else
-        echo "avconv transcod in MP3 $i: ERROR"  >> "$data-convert-wav2mp3";
+        echo "avconv transcod in MP3 $i: ERROR"  >> /tmp/"$data-convert-wav2mp3";
         exit 1;
     fi
 done
 
-echo "--- convert-wav2mp3 END ---" >> "$data-convert-wav2mp3";
+echo "--- convert-wav2mp3 END ---" >> /tmp/"$data-convert-wav2mp3";
 exit 0;

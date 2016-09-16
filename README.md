@@ -2,7 +2,7 @@ Bash scripts
 =============
 A collection of bash scripts.
 
-## Bash
+## list of script
 
-*convert-wav2mp3.sh
+* convert-wav2mp3.sh
     Converto all the file from wav format in mp3 format with `avconv` tool

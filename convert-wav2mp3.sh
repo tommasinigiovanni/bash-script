@@ -18,34 +18,35 @@
 #
 set -e   # Uncomment to: it should exit the script if any statement returns a non-true return value
 
-data=$(date '+%Y%m%d');
-folder="/var/spool/asterisk/monitor";
+DATA=$(date '+%Y%m%d');
+FOLDER="/var/spool/asterisk/monitor";
+LOG_FILE=/tmp/"$DATA-convert-wav2mp3"
 
-echo "--- convert-wav2mp3 START ---" >> /tmp/"$data-convert-wav2mp3";
+echo "--- convert-wav2mp3 START ---" >> $LOG_FILE;
 
-if mkdir "$folder"/"$data"; then
-    echo "mkdir folder $folder/$data: OK"  >> /tmp/"$data-convert-wav2mp3";
+if mkdir "$FOLDER"/"$DATA"; then
+    echo "mkdir folder $FOLDER/$DATA: OK"  >> $LOG_FILE;
 else
-    echo "mkdir folder $folder/$data: FAIL" >> /tmp/"$data-convert-wav2mp3";
+    echo "mkdir folder $FOLDER/$DATA: FAIL" >> $LOG_FILE;
     exit 1;
 fi
 
-if cd $folder; then
-    echo "cd in forlder $folder: OK"  >> /tmp/"$data-convert-wav2mp3";
+if cd $FOLDER; then
+    echo "cd in forlder $FOLDER: OK"  >> $LOG_FILE;
 else
-    echo "cd in forder $folder: FAIL"  >> /tmp/"$data-convert-wav2mp3";
+    echo "cd in forder $FOLDER: FAIL"  >> $LOG_FILE;
     exit 1;
 fi
 
-for i in $data*.wav; do 
-    if avconv -i "$i" -acodec libmp3lame "$data"/"${i%%???}"mp3 > /dev/null 2>&1; then
+for i in $DATA*.wav; do 
+    if avconv -i "$i" -acodec libmp3lame "$DATA"/"${i%%???}"mp3 > /dev/null 2>&1; then
         rm "$i";
-        echo "avconv transcod in MP3 $i: OK"  >> /tmp/"$data-convert-wav2mp3";
+        echo "avconv transcod in MP3 $i: OK"  >> $LOG_FILE;
     else
-        echo "avconv transcod in MP3 $i: ERROR"  >> /tmp/"$data-convert-wav2mp3";
+        echo "avconv transcod in MP3 $i: ERROR"  >> $LOG_FILE;
         exit 1;
     fi
 done
 
-echo "--- convert-wav2mp3 END ---" >> /tmp/"$data-convert-wav2mp3";
+echo "--- convert-wav2mp3 END ---" >> $LOG_FILE;
 exit 0;

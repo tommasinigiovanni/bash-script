@@ -21,7 +21,7 @@ set -e   # Uncomment to: it should exit the script if any statement returns a no
 data=$(date '+%Y%m%d');
 folder="/var/spool/asterisk/monitor";
 
-echo "--- e_conversione START ---" >> /tmp/"$data-convert-wav2mp3";
+echo "--- convert-wav2mp3 START ---" >> /tmp/"$data-convert-wav2mp3";
 
 if mkdir "$folder"/"$data"; then
     echo "mkdir folder $folder/$data: OK"  >> /tmp/"$data-convert-wav2mp3";
@@ -47,5 +47,5 @@ for i in $data*.wav; do
     fi
 done
 
-echo "--- e_conversione END ---" >> "$data-convert-wav2mp3";
+echo "--- convert-wav2mp3 END ---" >> "$data-convert-wav2mp3";
 exit 0;

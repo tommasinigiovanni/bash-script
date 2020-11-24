@@ -17,7 +17,6 @@ set -e   # Uncomment to: it should exit the script if any statement returns a no
 PASSWORD=${1}
 FILE=${2}
 
-
 display_usage() { 
     echo "This script must be run giving password and file(s) to decrypt" 
     echo -e "\nUsage: ${0} password file.pdf\n" 
